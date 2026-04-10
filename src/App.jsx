@@ -41,6 +41,7 @@ function App() {
         >
           <h1 className="text-4xl md:text-6xl font-bold">
             <Typewriter
+              key={dark ? "dark-mode" : "light-mode"}
               words={["Hi, I'm Veeresh 👋"]}
               typeSpeed={70}
               deleteSpeed={0}
@@ -55,7 +56,7 @@ function App() {
               dark ? "text-gray-400" : "text-gray-700"
             }`}
           >
-            I design and build scalable full-stack applications with real-time
+            I build scalable full-stack applications with real-time
             capabilities, focusing on performance, clean architecture, and
             seamless user experience. Passionate about solving real-world
             problems through efficient backend systems and intuitive frontend
@@ -90,7 +91,7 @@ function App() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           whileHover={{ scale: 1.05 }}
-          viewport={{ once: true }} 
+          viewport={{ once: true }}
         />
       </section>
 
