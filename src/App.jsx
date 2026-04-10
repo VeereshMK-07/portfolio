@@ -40,7 +40,13 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
         >
           <h1 className="text-4xl md:text-6xl font-bold">
-            <Typewriter words={["Hi, I'm Veeresh 👋"]} cursor typeSpeed={70} />
+            <Typewriter
+              words={["Hi, I'm Veeresh 👋"]}
+              typeSpeed={70}
+              deleteSpeed={0}
+              delaySpeed={1000}
+              loop={1}
+            />
           </h1>
 
           {/* IMPROVED PARA */}
