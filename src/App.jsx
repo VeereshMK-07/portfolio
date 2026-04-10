@@ -1,15 +1,45 @@
 import { motion, useScroll } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { FaLinkedin, FaInstagram } from "react-icons/fa";
 
 function App() {
   const [dark, setDark] = useState(true);
   const [showResume, setShowResume] = useState(false);
+  const [trigger, setTrigger] = useState(0);
   const { scrollYProgress } = useScroll();
+
+  // ✅ TYPEWRITER CONTROL (ONLY refresh + theme change)
+  useEffect(() => {
+    setTrigger((prev) => prev + 1);
+  }, [dark]);
+
+  // ✅ CURSOR GLOW EFFECT (APPLE STYLE)
+  useEffect(() => {
+    const glow = document.getElementById("cursor-glow");
+
+    const move = (e) => {
+      if (!glow) return;
+      glow.style.left = e.clientX + "px";
+      glow.style.top = e.clientY + "px";
+    };
+
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
 
   return (
     <div className={dark ? "bg-[#0f0f0f] text-white" : "bg-white text-black"}>
+
+      {/* 🔥 CURSOR GLOW */}
+      <div
+        id="cursor-glow"
+        className={`fixed w-40 h-40 rounded-full blur-3xl pointer-events-none z-0 transition ${
+          dark ? "bg-white/10" : "bg-black/10"
+        }`}
+        style={{ transform: "translate(-50%, -50%)" }}
+      />
+
       {/* SCROLL BAR */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-white origin-left z-50"
@@ -34,14 +64,15 @@ function App() {
       </nav>
 
       {/* HERO */}
-      <section className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-20 pt-24 gap-12">
+      <section className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-20 pt-24 gap-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
         >
+          {/* ✅ FIXED TYPEWRITER */}
           <h1 className="text-4xl md:text-6xl font-bold">
             <Typewriter
-              key={dark ? "dark-mode" : "light-mode"}
+              key={trigger}
               words={["Hi, I'm Veeresh 👋"]}
               typeSpeed={70}
               deleteSpeed={0}
@@ -50,7 +81,6 @@ function App() {
             />
           </h1>
 
-          {/* IMPROVED PARA */}
           <p
             className={`mt-6 text-lg leading-relaxed max-w-xl ${
               dark ? "text-gray-400" : "text-gray-700"
@@ -83,6 +113,7 @@ function App() {
           </div>
         </motion.div>
 
+        {/* IMAGE */}
         <motion.img
           src="/profile.jpg"
           alt="profile"
@@ -106,12 +137,11 @@ function App() {
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* PROJECTS (UNCHANGED ✅) */}
       <section id="projects" className="py-24 px-6 md:px-20">
         <h2 className="text-4xl font-bold mb-12">Projects</h2>
 
         <div className="grid md:grid-cols-2 gap-10">
-          {/* PROJECT */}
           <motion.div
             whileHover={{ rotateX: 8, rotateY: -8, scale: 1.05 }}
             className="bg-white/5 border p-6 rounded-2xl"
@@ -123,7 +153,6 @@ function App() {
               portfolio tracking, and secure authentication.
             </p>
 
-            {/* TECH STACK */}
             <div className="flex gap-2 mt-4 flex-wrap text-sm">
               <span className="border px-2 py-1 rounded">React</span>
               <span className="border px-2 py-1 rounded">Node</span>
@@ -132,25 +161,16 @@ function App() {
             </div>
 
             <div className="mt-6 flex gap-4">
-              <a
-                href="https://zerodha-frontend-dzxz.onrender.com"
-                target="_blank"
-                className="px-4 py-2 bg-white text-black rounded-lg"
-              >
+              <a href="https://zerodha-frontend-dzxz.onrender.com" target="_blank" className="px-4 py-2 bg-white text-black rounded-lg">
                 Live
               </a>
 
-              <a
-                href="https://github.com/VeereshMK-07/zerodha-frontend"
-                target="_blank"
-                className="px-4 py-2 border rounded-lg"
-              >
+              <a href="https://github.com/VeereshMK-07/zerodha-frontend" target="_blank" className="px-4 py-2 border rounded-lg">
                 Code
               </a>
             </div>
           </motion.div>
 
-          {/* PROJECT 2 */}
           <motion.div
             whileHover={{ rotateX: 8, rotateY: -8, scale: 1.05 }}
             className="bg-white/5 border p-6 rounded-2xl"
@@ -171,19 +191,11 @@ function App() {
             </div>
 
             <div className="mt-6 flex gap-4">
-              <a
-                href="https://wander-lust-uyrf.onrender.com/listings"
-                target="_blank"
-                className="px-4 py-2 bg-white text-black rounded-lg"
-              >
+              <a href="https://wander-lust-uyrf.onrender.com/listings" target="_blank" className="px-4 py-2 bg-white text-black rounded-lg">
                 Live
               </a>
 
-              <a
-                href="https://github.com/VeereshMK-07/WanderLust"
-                target="_blank"
-                className="px-4 py-2 border rounded-lg"
-              >
+              <a href="https://github.com/VeereshMK-07/WanderLust" target="_blank" className="px-4 py-2 border rounded-lg">
                 Code
               </a>
             </div>
@@ -191,7 +203,7 @@ function App() {
         </div>
       </section>
 
-      {/* SKILLS */}
+      {/* SKILLS (UNCHANGED ✅) */}
       <section id="skills" className="py-20 px-6 md:px-20">
         <h2 className="text-3xl font-bold mb-10">Skills</h2>
 
@@ -210,15 +222,11 @@ function App() {
               key={skill}
               whileHover={{ scale: 1.08 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className={`p-4 rounded-xl text-center border transition duration-300 cursor-pointer
-          
-          ${
-            dark
-              ? "border-gray-700 hover:bg-white hover:text-black"
-              : "border-gray-300 hover:bg-black hover:text-white"
-          }
-          
-          `}
+              className={`p-4 rounded-xl text-center border transition duration-300 cursor-pointer ${
+                dark
+                  ? "border-gray-700 hover:bg-white hover:text-black"
+                  : "border-gray-300 hover:bg-black hover:text-white"
+              }`}
             >
               {skill}
             </motion.div>
@@ -229,20 +237,17 @@ function App() {
       {/* FOOTER */}
       <footer className="py-10 text-center border-t border-white/10">
         <p className="mb-4">Connect with me</p>
-        <br></br>
+
         <div className="flex justify-center gap-6 text-2xl">
-          <a
-            href="https://www.linkedin.com/in/veeresh-kakamari/"
-            target="_blank"
-          >
+          <a href="https://www.linkedin.com/in/veeresh-kakamari/" target="_blank">
             <FaLinkedin />
           </a>
           <a href="https://instagram.com/your-link" target="_blank">
             <FaInstagram />
           </a>
         </div>
-        <br></br>
-        <p className="mb-4">&copy; Veeresh Kakamari | All rights reserved</p>
+
+        <p className="mt-4">&copy; Veeresh Kakamari | All rights reserved</p>
       </footer>
 
       {/* RESUME MODAL */}
