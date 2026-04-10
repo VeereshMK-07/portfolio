@@ -84,7 +84,20 @@ function App() {
 
         <motion.img
           src="/profile.jpg"
-          className="w-64 h-64 md:w-[350px] md:h-[350px] rounded-full object-cover"
+          alt="profile"
+          className="w-64 h-64 md:w-[350px] md:h-[350px] rounded-full object-cover shadow-2xl border border-white/10"
+          initial={{ opacity: 0, scale: 0.8, y: 50 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            y: [0, -10, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          whileHover={{ scale: 1.08 }}
         />
       </section>
 
