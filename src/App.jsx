@@ -203,7 +203,7 @@ function App() {
         </div>
       </section>
 
-      {/* SKILLS (UNCHANGED ✅) */}
+      {/* SKILLS  */}
       <section id="skills" className="py-20 px-6 md:px-20">
         <h2 className="text-3xl font-bold mb-10">Skills</h2>
 
@@ -242,7 +242,7 @@ function App() {
           <a href="https://www.linkedin.com/in/veeresh-kakamari/" target="_blank">
             <FaLinkedin />
           </a>
-          <a href="https://instagram.com/your-link" target="_blank">
+          <a href="https://www.instagram.com/veeresh_kakamari07?utm_source=qr" target="_blank">
             <FaInstagram />
           </a>
         </div>
